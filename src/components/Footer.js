@@ -1,86 +1,49 @@
 import { Link } from "react-router-dom";
+import { routes } from "./Nav";
 
 export const Footer = () => {
   return (
     <footer>
-      <div className="one">
-        <img src="logo.svg" alt="Secondary Logo" />
+      <img src="/Asset 20@4x.png" alt="Secondary Logo" className="logo" />
+      <div>
+        <h5>Navigation</h5>
+        <div className="list-container">
+          {routes.map((item) => {
+            return (
+              <Link key={item.label} to={item.route}>
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
       </div>
-      <div className="two">
-        <ul>
-          <h5>Navigation</h5>
-          <li>
-            <Link to="/" className="a">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="a">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/menu" className="a">
-              Menu
-            </Link>
-          </li>
-          <li>
-            <Link to="/reservations" className="a">
-              Reservations
-            </Link>
-          </li>
-          <li>
-            <Link to="/order" className="a">
-              Order Online
-            </Link>
-          </li>
-          <li>
-            <Link to="/login" className="a">
-              Login
-            </Link>
-          </li>
-        </ul>
+      <div>
+        <h5>Contact</h5>
+        <div className="list-container">
+          <div>
+            <p>25238 Hosea Cape, Chicago, IL 6007</p>
+          </div>
+          <div>
+            <p>+1 (555) 555-5555</p>
+          </div>
+          <div>
+            <p>LittleLemon@LittleLemon.com</p>
+          </div>
+        </div>
       </div>
-      <div className="three">
-        <ul>
-          <h5>Contact</h5>
-          <li>
-            <Link id="nav" href="#">
-              Phone Number
-            </Link>
-          </li>
-          <li>
-            <Link id="nav" href="#">
-              Email
-            </Link>
-          </li>
-          <li>
-            <Link id="nav" href="#">
-              Address
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className="four">
-        <ul>
-          <h5>Social Media</h5>
-
-          <li>
-            <Link id="nav" href="#">
-              Instagram
-            </Link>
-          </li>
-          <li>
-            <Link id="nav" href="#">
-              LinkedIn
-            </Link>
-          </li>
-          <li>
-            <Link id="nav" href="#">
-              Pinterest
-            </Link>
-          </li>
-        </ul>
+      <div>
+        <h5>Social Media</h5>
+        <div className="list-container">
+          <Link id="nav" to="#">
+            Instagram
+          </Link>
+          <Link id="nav" to="#">
+            LinkedIn
+          </Link>
+          <Link id="nav" to="#">
+            Pinterest
+          </Link>
+        </div>
       </div>
     </footer>
   );

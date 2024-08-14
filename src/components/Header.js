@@ -3,7 +3,7 @@ import { Nav } from "./Nav";
 export const Header = () => {
   return (
     <header>
-      <img src="logo.svg" alt="Logo" />
+      <img className="header-img" src="logo.svg" alt="Logo" />
 
       <Nav />
     </header>

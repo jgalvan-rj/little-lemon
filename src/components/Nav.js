@@ -1,28 +1,42 @@
 import { Link } from "react-router-dom";
 
+export const routes = [
+  {
+    label: "Home",
+    route: "/",
+  },
+  {
+    label: "About",
+    route: "/",
+  },
+  {
+    label: "Menu",
+    route: "/",
+  },
+  {
+    label: "Reservations",
+    route: "/reservations",
+  },
+  {
+    label: "Order Online",
+    route: "/",
+  },
+  {
+    label: "Login",
+    route: "/",
+  },
+];
+
 export const Nav = () => {
   return (
     <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/">About</Link>
-        </li>
-        <li>
-          <Link to="/">Menu</Link>
-        </li>
-        <li>
-          <Link to="/reservations">Reservations</Link>
-        </li>
-        <li>
-          <Link to="/">Order Online</Link>
-        </li>
-        <li>
-          <Link to="/">Login</Link>
-        </li>
-      </ul>
+      {routes.map((item) => {
+        return (
+          <Link key={item.label} to={item.route}>
+            {item.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 };
