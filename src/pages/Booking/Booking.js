@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { BookingForm } from "./BookingForm";
 import { ConfirmedBooking } from "./ConfirmedBooking";
 import { fetchAPI, submitAPI } from "../../helpers/fakeApi";
@@ -12,7 +12,11 @@ export function updateTimes(state, action) {
 }
 
 export const Booking = () => {
-  const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
+  const [availableTimes, dispatch] = useReducer(updateTimes, []);
+
+  useEffect(() => {
+    dispatch(new Date());
+  }, []);
 
   const [values, setValues] = useState({
     firstName: "",
@@ -21,7 +25,7 @@ export const Booking = () => {
     phone: "",
     seating: "",
     occasion: "",
-    date: new Date(),
+    date: new Date().toISOString().split("T")[0],
     time: "",
     numberOfGuests: 0,
   });

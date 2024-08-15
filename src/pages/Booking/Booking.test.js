@@ -1,9 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BookingForm } from "./BookingForm";
 import { initializeTimes, updateTimes } from "..";
 
 const dummyFunction = jest.fn();
 const dispatchOnDateChange = jest.fn();
+const onSubmit = jest.fn();
 
 test("renders Reservation component", () => {
   const values = {
@@ -47,54 +48,112 @@ test("updateTimes returns the expected initial times", () => {
   expect(actualTimes).toEqual(expectedTimes);
 });
 
-// test("ReservationForm can be submitted by the user", () => {
-//   const values = {
-//     firstName: "",
-//     lastName: "",
-//     email: "",
-//     phone: "",
-//     seating: "",
-//     occasion: "",
-//     date: "",
-//     time: "",
-//     numberOfGuests: 0,
-//   };
+test("ReservationForm updateTimes", () => {
+  const values = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    seating: "",
+    occasion: "",
+    date: "",
+    time: "19:00",
+    numberOfGuests: 1,
+  };
 
-//   render(
-//     <BookingForm
-//       availableTimes={initializeTimes()}
-//       values={values}
-//       dispatchOnDateChange={dispatchOnDateChange}
-//       setValues={dummyFunction}
-//       onSubmit={dummyFunction}
-//     />
-//   );
+  render(
+    <BookingForm
+      availableTimes={["19:00"]}
+      values={values}
+      dispatchOnDateChange={dispatchOnDateChange}
+      setValues={dummyFunction}
+      onSubmit={onSubmit}
+    />
+  );
 
-//   // Fill in form fields (you may need to adjust the selectors based on your form structure)
-//   const firstNameInput = screen.getByPlaceholderText("First name");
-//   const lastNameInput = screen.getByPlaceholderText("Last name");
-//   const emailInput = screen.getByPlaceholderText("Email");
-//   const phoneInput = screen.getByPlaceholderText("Phone");
-//   const seatingInput = screen.getByLabelText("Indoor");
-//   const occasionSelect = screen.getByLabelText("Birthday");
-//   const dateInput = screen.getByPlaceholderText("Date");
-//   const timeSelect = screen.getByPlaceholderText("Time");
-//   const guestsInput = screen.getByPlaceholderText("Select Number of Guests");
+  // Fill in form fields (you may need to adjust the selectors based on your form structure)
+  const firstNameInput = screen.getByPlaceholderText("First name");
+  const lastNameInput = screen.getByPlaceholderText("Last name");
+  const emailInput = screen.getByPlaceholderText("Email");
+  const phoneInput = screen.getByPlaceholderText("Phone");
+  const seatingInput = screen.getByLabelText("Indoor");
+  const occasionSelect = screen.getByLabelText("Birthday");
+  const dateInput = screen.getByPlaceholderText("Date");
 
-//   fireEvent.change(firstNameInput, { target: { value: "John" } });
-//   fireEvent.change(lastNameInput, { target: { value: "Doe" } });
-//   fireEvent.change(emailInput, { target: { value: "hi@hi.com" } });
-//   fireEvent.change(phoneInput, { target: { value: "1234567890" } });
-//   fireEvent.change(seatingInput, { target: { value: "Indoor" } });
-//   fireEvent.change(dateInput, { target: { value: "2024-08-15" } });
-//   fireEvent.change(timeSelect, { target: { value: "19:00" } });
-//   fireEvent.change(guestsInput, { target: { value: "4" } });
-//   fireEvent.change(occasionSelect, { target: { value: "Birthday" } });
+  fireEvent.change(firstNameInput, { target: { value: "John" } });
+  fireEvent.change(lastNameInput, { target: { value: "Doe" } });
+  fireEvent.change(emailInput, { target: { value: "hi@hi.com" } });
+  fireEvent.change(phoneInput, { target: { value: "1234567890" } });
+  fireEvent.change(seatingInput, { target: { value: "Indoor" } });
+  fireEvent.change(occasionSelect, { target: { value: "Birthday" } });
+  fireEvent.change(dateInput, { target: { value: "2024-08-15" } });
 
-//   // Simulate form submission
-//   const submitButton = screen.getByText("Make Your reservation");
-//   fireEvent.click(submitButton);
+  // Simulate form submission
+  const submitButton = screen.getByText("Make Your reservation");
+  fireEvent.click(submitButton);
 
-//   // Verify that the updateTimes function was called with the selected date
-//   expect(dispatchOnDateChange).toHaveBeenCalledWith("2024-08-15");
-// });
+  // Verify that the updateTimes function was called with the selected date
+  expect(dispatchOnDateChange).toHaveBeenCalledWith("2024-08-15");
+});
+
+test("ReservationForm user can submit", () => {
+  const values = {
+    firstName: "hi",
+    lastName: "hi",
+    email: "hi@hi.com",
+    phone: "5555555555",
+    seating: "Indoor",
+    occasion: "",
+    date: "2024-08-15",
+    time: "19:00",
+    numberOfGuests: 1,
+  };
+
+  render(
+    <BookingForm
+      availableTimes={["19:00"]}
+      values={values}
+      dispatchOnDateChange={dispatchOnDateChange}
+      setValues={dummyFunction}
+      onSubmit={onSubmit}
+    />
+  );
+
+  // Simulate form submission
+  const submitButton = screen.getByText("Make Your reservation");
+  fireEvent.click(submitButton);
+
+  // Verify onsubmit has been called
+  expect(onSubmit).toHaveBeenCalled();
+});
+
+test("ReservationForm user cannot submit", () => {
+  const values = {
+    firstName: "",
+    lastName: "hi",
+    email: "hi@hi.com",
+    phone: "5555555555",
+    seating: "Indoor",
+    occasion: "",
+    date: "2024-08-15",
+    time: "19:00",
+    numberOfGuests: 1,
+  };
+
+  render(
+    <BookingForm
+      availableTimes={["19:00"]}
+      values={values}
+      dispatchOnDateChange={dispatchOnDateChange}
+      setValues={dummyFunction}
+      onSubmit={onSubmit}
+    />
+  );
+
+  // Simulate form submission
+  const submitButton = screen.getByText("Make Your reservation");
+  fireEvent.click(submitButton);
+
+  // Verify onsubmit has not been called
+  expect(onSubmit).toHaveBeenCalledTimes(0);
+});

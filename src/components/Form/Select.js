@@ -12,6 +12,7 @@ export const Select = (props) => {
         onChange={props.onChange}
         value={props.value}
         type="select"
+        aria-label={props.name}
       >
         {props.displayEmpty && <option value="">{props.placeholder}</option>}
         {props.options.map((option) => (

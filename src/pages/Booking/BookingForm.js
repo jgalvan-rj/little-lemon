@@ -35,13 +35,6 @@ const validateSeating = (seating) => {
     : null;
 };
 
-const validateOccasion = (occasion) => {
-  return occasion !== Occasion.Anniversary.value &&
-    occasion !== Occasion.Birthday.value
-    ? "Invalid occasion option"
-    : null;
-};
-
 const validateNumberOfGuests = (guests) => {
   return !NumberOfGuests.includes(Number(guests))
     ? "Invalid number of guests"
@@ -54,7 +47,7 @@ const ReserveTableSchema = {
   email: (e) => isRequired(e) || (!validateEmail(e) && "Invalid email"),
   phone: (e) => isRequired(e) || (!validatePhone(e) && "Invalid phone number"),
   seating: (e) => isRequired(e) || validateSeating(e),
-  occasion: (e) => isRequired(e) || validateOccasion(e),
+  occasion: (e) => null,
   date: (e) => isRequired(e) || validateDate(e),
   time: (e) => isRequired(e),
   numberOfGuests: (e) => isRequired(e) || validateNumberOfGuests(e),
@@ -177,7 +170,7 @@ export const BookingForm = ({
         <RadioGroup
           className="reservation-field"
           label="Occasion"
-          required
+          isRequired={false}
           error={error.occasion && touched.occasion}
           helperText={touched.occasion && error.occasion}
           name="occasion"

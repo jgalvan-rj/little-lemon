@@ -12,5 +12,5 @@ export const HelperText = (props) => {
 
 HelperText.propTypes = {
   error: PropTypes.bool,
-  helperText: PropTypes.string,
+  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };

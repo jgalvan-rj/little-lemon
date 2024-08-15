@@ -6,7 +6,7 @@ export const InputLabel = (props) => {
       htmlFor={props.name}
       className={props.className + (props.error ? " input-error" : "")}
     >
-      {props.label} {props.required && <sup>*</sup>}
+      {`${props.label}${props.required ? " *" : ""}`}
     </label>
   );
 };
