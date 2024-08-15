@@ -1,30 +1,23 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { validateEmail, validatePhone } from "../helpers/utils";
-import { TextField } from "./Form/TextField";
-import { RadioGroup } from "../components/Form/RadioGroup";
-import { Radio } from "../components/Form/Radio";
-import { DateField } from "../components/Form/DateField";
-import { Select } from "../components/Form/Select";
+import { validateEmail, validatePhone } from "../../helpers/utils";
+import { TextField } from "../../components/Form/TextField";
+import { RadioGroup } from "../../components/Form/RadioGroup";
+import { Radio } from "../../components/Form/Radio";
+import { DateField } from "../../components/Form/DateField";
+import { Select } from "../../components/Form/Select";
 
 const Seating = Object.freeze({
   Indoor: { value: "Indoor" },
   Outdoor: { value: "Outdoor" },
 });
 
-const ReservationTimes = Object.freeze([
-  "5:00 PM",
-  "5:30 PM",
-  "6:00 PM",
-  "6:30 PM",
-  "7:00 PM",
-  "7:30 PM",
-  "8:00 PM",
-  "8:30 PM",
-  "9:00 PM",
-]);
+const Occasion = Object.freeze({
+  Birthday: { value: "Birthday" },
+  Anniversary: { value: "Anniversary" },
+});
 
-const NumberOfGuests = Object.freeze([1, 2, 3, 4, 5, 6]);
+const NumberOfGuests = Object.freeze([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
 const isRequired = (value, errorText = "Required") => {
   return !value ? errorText : null;
@@ -36,13 +29,16 @@ const validateDate = (date) => {
   return date < today ? "Date must be greater than today" : null;
 };
 
-const validateTime = (time) => {
-  return !ReservationTimes.includes(time) ? "Invalid time" : null;
-};
-
 const validateSeating = (seating) => {
   return seating !== Seating.Indoor.value && seating !== Seating.Outdoor.value
     ? "Invalid seating option"
+    : null;
+};
+
+const validateOccasion = (occasion) => {
+  return occasion !== Occasion.Anniversary.value &&
+    occasion !== Occasion.Birthday.value
+    ? "Invalid occasion option"
     : null;
 };
 
@@ -58,12 +54,19 @@ const ReserveTableSchema = {
   email: (e) => isRequired(e) || (!validateEmail(e) && "Invalid email"),
   phone: (e) => isRequired(e) || (!validatePhone(e) && "Invalid phone number"),
   seating: (e) => isRequired(e) || validateSeating(e),
+  occasion: (e) => isRequired(e) || validateOccasion(e),
   date: (e) => isRequired(e) || validateDate(e),
-  time: (e) => isRequired(e) || validateTime(e),
+  time: (e) => isRequired(e),
   numberOfGuests: (e) => isRequired(e) || validateNumberOfGuests(e),
 };
 
-export const Reservation = ({ values, setValues, onSubmit }) => {
+export const BookingForm = ({
+  availableTimes,
+  dispatchOnDateChange,
+  values,
+  setValues,
+  onSubmit,
+}) => {
   const [touched, setTouched] = useState({});
   const [error, setError] = useState({});
 
@@ -171,6 +174,25 @@ export const Reservation = ({ values, setValues, onSubmit }) => {
           <Radio value={Seating.Indoor.value} label={Seating.Indoor.value} />
           <Radio value={Seating.Outdoor.value} label={Seating.Outdoor.value} />
         </RadioGroup>
+        <RadioGroup
+          className="reservation-field"
+          label="Occasion"
+          required
+          error={error.occasion && touched.occasion}
+          helperText={touched.occasion && error.occasion}
+          name="occasion"
+          onChange={handleChange}
+          value={values.occasion}
+        >
+          <Radio
+            value={Occasion.Anniversary.value}
+            label={Occasion.Anniversary.value}
+          />
+          <Radio
+            value={Occasion.Birthday.value}
+            label={Occasion.Birthday.value}
+          />
+        </RadioGroup>
         <DateField
           className="reservation-field"
           name="date"
@@ -180,7 +202,10 @@ export const Reservation = ({ values, setValues, onSubmit }) => {
             values.date ? new Date(values.date).toISOString().split("T")[0] : ""
           }
           required
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            dispatchOnDateChange(e.target.value);
+          }}
           error={error.date && touched.date}
           helperText={touched.date && error.date}
           minDate={new Date().toISOString().split("T")[0]}
@@ -189,13 +214,13 @@ export const Reservation = ({ values, setValues, onSubmit }) => {
           className="reservation-field"
           name="time"
           label="Time"
-          placeholder="Select Time"
+          placeholder="Time"
           value={values.time}
           required
           onChange={handleChange}
           error={error.time && touched.time}
           helperText={touched.time && error.time}
-          options={ReservationTimes.map((time) => ({
+          options={availableTimes.map((time) => ({
             label: time,
             value: time,
           }))}
@@ -217,15 +242,21 @@ export const Reservation = ({ values, setValues, onSubmit }) => {
           }))}
           displayEmpty
         />
-        <button type="submit" className="reserve-button">
-          Reserve Table
+        <button
+          type="submit"
+          className="reserve-button"
+          aria-label="On click make your reservation"
+        >
+          Make Your reservation
         </button>
       </form>
     </section>
   );
 };
 
-Reservation.propTypes = {
+BookingForm.propTypes = {
+  availableTimes: PropTypes.array.isRequired,
+  dispatchOnDateChange: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
   setValues: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

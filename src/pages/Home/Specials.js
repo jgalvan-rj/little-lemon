@@ -1,4 +1,4 @@
-import { LinkButton } from "./LinkButton";
+import { LinkButton } from "../../components/LinkButton";
 import { SpecialsCard } from "./SpecialsCard";
 
 export const Specials = () => {
@@ -32,7 +32,11 @@ export const Specials = () => {
           <h1 className="black">This weeks specials!</h1>
         </div>
         <div className="specials-content">
-          <LinkButton to="#" text="Online Menu" />
+          <LinkButton
+            to="#"
+            text="Online Menu"
+            aria-label="On click view online menu"
+          />
         </div>
       </div>
       <div className="specials-container">

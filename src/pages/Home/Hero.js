@@ -1,4 +1,4 @@
-import { LinkButton } from "./LinkButton";
+import { LinkButton } from "../../components/LinkButton";
 
 export const Hero = () => {
   return (
@@ -11,7 +11,11 @@ export const Hero = () => {
             We are a family owned Mediterranean restaurant, focused on
             traditional recipes served with a modern twist.
           </p>
-          <LinkButton to="/booking" text="Reserve a Table" />
+          <LinkButton
+            to="/reservations"
+            text="Reserve a Table"
+            aria-label="On click make your reservation"
+          />
         </div>
       </div>
       <div className="hero-container">

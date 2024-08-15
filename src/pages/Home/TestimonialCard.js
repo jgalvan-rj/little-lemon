@@ -1,4 +1,4 @@
-import starIcon from "../assets/icons/Five_Pointed_Star_Solid.svg";
+import starIcon from "../../assets/icons/Five_Pointed_Star_Solid.svg";
 
 import PropTypes from "prop-types";
 
@@ -6,9 +6,9 @@ export const TestimonialCard = (props) => {
   return (
     <div className="testimonials-card">
       <div className="testimonials-card-rating-container">
-        {Array.from({ length: props.rating }).map((el) => (
+        {Array.from({ length: props.rating }).map((_, index) => (
           <img
-            key={el}
+            key={index}
             src={starIcon}
             alt="Star Icon"
             className="testimonials-card-star"

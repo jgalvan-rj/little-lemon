@@ -1,4 +1,4 @@
-import motorbikeIcon from "../assets/icons/motorbike-delivery.svg";
+import motorbikeIcon from "../../assets/icons/motorbike-delivery.svg";
 import PropTypes from "prop-types";
 
 export const SpecialsCard = (props) => {
@@ -7,7 +7,7 @@ export const SpecialsCard = (props) => {
       <div className="specials-img-cover">
         <div
           className="specials-img"
-          style={{ "background-image": `url('${props.imageURL}')` }}
+          style={{ backgroundImage: `url('${props.imageURL}')` }}
         />
       </div>
       <div className="specials-description">

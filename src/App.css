@@ -522,6 +522,8 @@ form {
 
 .reserve-button {
   margin-top: 25px;
+  flex: 100%;
+  cursor: pointer;
 }
 
 .reservation-confirmed {

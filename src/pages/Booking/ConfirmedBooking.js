@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import { LinkButton } from "./LinkButton";
+import { LinkButton } from "../../components/LinkButton";
 
-export const ReservationConfirmed = ({ values, onEdit }) => {
+export const ConfirmedBooking = ({ values, onEdit }) => {
   const number = "3YSMBYS4D51V";
   return (
     <section className="reservation-confirmed">
@@ -18,10 +18,18 @@ export const ReservationConfirmed = ({ values, onEdit }) => {
           <p>{`for ${values.numberOfGuests} at ${values.time}`}</p>
         </div>
         <div className="reservation-details-button-container">
-          <button className="link-button" onClick={onEdit}>
+          <button
+            className="link-button"
+            onClick={onEdit}
+            aria-label="On click edit your reservation"
+          >
             Edit Reservation
           </button>
-          <LinkButton text="Cancel Reservation" to="/" />
+          <LinkButton
+            text="Cancel Reservation"
+            to="/"
+            aria-label="On click cancel your reservation"
+          />
         </div>
       </div>
 
@@ -48,7 +56,7 @@ export const ReservationConfirmed = ({ values, onEdit }) => {
   );
 };
 
-ReservationConfirmed.propTypes = {
+ConfirmedBooking.propTypes = {
   values: PropTypes.object.isRequired,
   onEdit: PropTypes.func.isRequired,
 };

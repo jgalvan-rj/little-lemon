@@ -9,7 +9,7 @@ export const Radio = (props) => {
           name={props.name}
           value={props.value}
           onClick={props.onChange}
-          checked={props.checked}
+          defaultChecked={props.checked}
         />
       </span>
       <span className="radio-label-text">{props.label}</span>

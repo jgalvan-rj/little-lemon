@@ -28,7 +28,7 @@ export const Select = (props) => {
 Select.propTypes = {
   className: PropTypes.string,
   error: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
   name: PropTypes.string.isRequired,
