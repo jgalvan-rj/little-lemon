@@ -66,12 +66,5 @@ export const Header = () => {
         </div>
       </nav>
     </header>
-    // <header>
-    //   <img className="header-img" src="logo.svg" alt="Logo" />
-    //   <nav>
-    //     <Nav />
-    //     <NavMobile />
-    //   </nav>
-    // </header>
   );
 };
