@@ -3,17 +3,21 @@
   padding-bottom: 50px;
 }
 
+@media screen and (max-width: 860px) {
+  #root {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
 body {
   font-family: "Karla", sans-serif;
 }
 
-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  column-gap: 40px;
-  height: 120px;
+@media screen and (max-width: 860px) {
+  #root {
+    height: auto;
+  }
 }
 
 .header-img {
@@ -36,6 +40,12 @@ main {
   display: flex;
   flex-direction: column;
   row-gap: 150px;
+}
+
+@media screen and (max-width: 860px) {
+  main {
+    row-gap: 30px;
+  }
 }
 
 .hero {
@@ -144,6 +154,18 @@ button[disabled] {
   width: 100%;
 }
 
+@media screen and (max-width: 860px) {
+  .hero-img-container {
+    display: none;
+  }
+  .hero-container {
+    padding-bottom: 20px;
+  }
+  .hero {
+    padding-top: 20px;
+  }
+}
+
 .specials {
   display: flex;
   align-items: start;
@@ -159,6 +181,13 @@ button[disabled] {
   width: 100%;
   flex-direction: row;
   column-gap: 40px;
+}
+
+@media screen and (max-width: 860px) {
+  .specials-container {
+    flex-direction: column;
+    row-gap: 20px;
+  }
 }
 
 .specials-content {
@@ -260,6 +289,13 @@ button[disabled] {
   column-gap: 40px;
 }
 
+@media screen and (max-width: 860px) {
+  .testimonials-container {
+    flex-direction: column;
+    row-gap: 20px;
+  }
+}
+
 .testimonials-content {
   display: flex;
   align-items: start;
@@ -346,6 +382,30 @@ button[disabled] {
   transform: translate(-50%, -50%);
 }
 
+@media screen and (max-width: 860px) {
+  .about {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .about-header {
+    text-align: center;
+  }
+  .about-container {
+    padding: 0px;
+    width: auto;
+  }
+  .about-image-container {
+    padding: 0px;
+    width: auto;
+  }
+  .about-image-container img {
+    width: 45%;
+  }
+  .about-image-container .top {
+    transform: translate(0, 0);
+  }
+}
+
 footer {
   display: flex;
   justify-content: center;
@@ -353,6 +413,17 @@ footer {
   padding: 20px;
   column-gap: 50px;
   border-top: 5px solid #495e57;
+}
+
+@media screen and (max-width: 860px) {
+  footer {
+    height: auto;
+    row-gap: 30px;
+    flex-direction: column;
+  }
+  .footer-logo {
+    width: 20%;
+  }
 }
 
 .list-container {
@@ -500,6 +571,11 @@ form {
   padding-top: 0px;
 }
 
+.reservation-header {
+  color: black;
+  text-align: center;
+}
+
 .reservation-form {
   display: flex;
   flex-direction: row;
@@ -507,6 +583,19 @@ form {
   width: 50%;
   flex-wrap: wrap;
   column-gap: 25px;
+}
+
+@media screen and (max-width: 860px) {
+  .reservation {
+    padding: 20px;
+    padding-top: 0px;
+  }
+  .reservation-form {
+    flex-direction: column;
+    padding: 0px;
+    width: 100%;
+    row-gap: 20px;
+  }
 }
 
 .reservation-field {
@@ -524,6 +613,7 @@ form {
   margin-top: 25px;
   flex: 100%;
   cursor: pointer;
+  align-self: center;
 }
 
 .reservation-confirmed {

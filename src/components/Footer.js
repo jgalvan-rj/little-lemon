@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import { routes } from "./Nav";
+import { routes } from "./Header";
 
 export const Footer = () => {
   return (
     <footer>
-      <img src="/Asset 20@4x.png" alt="Secondary Logo" className="logo" />
-      <div>
+      <img
+        src="/Asset 20@4x.png"
+        alt="Secondary Logo"
+        className="footer-logo"
+      />
+      <div className="footer-navigation">
         <h5>Navigation</h5>
         <div className="list-container">
           {routes.map((item) => {

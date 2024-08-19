@@ -108,7 +108,9 @@ export const BookingForm = ({
   return (
     <section className="reservation">
       <img src="/greek salad.jpg" alt="Greek Salad" className="res-image" />
-      <h2 className="black">Please Provide Your Reservation Details</h2>
+      <h2 className="reservation-header">
+        Please Provide Your Reservation Details
+      </h2>
       <form onSubmit={handleSubmit} noValidate className="reservation-form">
         <TextField
           className="reservation-field"

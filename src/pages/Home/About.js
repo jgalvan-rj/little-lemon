@@ -2,8 +2,7 @@ export const About = () => {
   return (
     <section className="about">
       <div className="about-container">
-        <h4>Little Lemon</h4>
-        <h5>Chicago</h5>
+        <h4 className="about-header">Our Story</h4>
         <p>
           Little Lemon is owned by two Italian brothers, Mario and Adrian, who
           moved to the United States to pursue their shared dream of owning a
